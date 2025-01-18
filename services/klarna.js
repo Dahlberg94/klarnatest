@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 
+
 export function getKlarnaAuth() {
 	const username = process.env.PUBLIC_KEY;
 	const password = process.env.SECRET_KEY;
@@ -48,7 +49,7 @@ export async function createOrder(product) {
 		merchant_urls: {
 			terms: 'https://www.example.com/terms.html',
 			checkout: 'https://www.example.com/checkout.html?order_id={checkout.order.id}',
-			confirmation: 'https://localhost:3000/confirmation?order_id={checkout.order.id}',
+			confirmation: `${process.env.CONFIRMATION_URL}?order_id={checkout.order.id}`,
 			push: 'https://www.example.com/api/push?order_id={checkout.order.id}'
 		}
 	};
