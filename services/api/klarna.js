@@ -1,5 +1,21 @@
 import fetch from 'node-fetch';
 
+export default async function handler(req, res) {
+	
+	if (req.method === 'POST') {
+	  try {
+		const { product } = req.body;
+		const response = await createOrder(product); 
+		return res.status(200).json(response);  
+	  } catch (error) {
+		console.error('Error creating Klarna order:', error);
+		return res.status(500).json({ error: 'Internal server error' });
+	  }
+	} else {
+	  return res.status(405).json({ message: 'Method Not Allowed' }); 
+	}
+  }
+
 export function getKlarnaAuth() {
 	const username = process.env.PUBLIC_KEY;
 	const password = process.env.SECRET_KEY;
@@ -87,3 +103,11 @@ export async function retrieveOrder(order_id) {
 		};
 	}
 }
+
+
+function getKlarnaAuth() {
+	const username = process.env.PUBLIC_KEY;
+	const password = process.env.SECRET_KEY;
+	const auth = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
+	return auth;
+  }
