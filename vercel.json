@@ -1,13 +1,14 @@
-
-{ 
-    "rewrites": [ { "source": "/(.*)", "destination": "/" } ],
-    
+{
+    "rewrites": [
+        { "source": "/", "destination": "/" },
+        { "source": "/product/:id", "destination": "/" },
+        { "source": "/confirmation", "destination": "/" }
+    ],
     "version": 2,
     "builds": [
         {
-            "src":".index.js",
+            "src": "index.js",
             "use": "@vercel/node"
         }
     ]
-
 }

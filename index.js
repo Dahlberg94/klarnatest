@@ -4,6 +4,7 @@ import express from 'express';
 const app = express();
 import { config } from 'dotenv';
 config();
+console.log('PORT:', process.env.PORT); // Lägg till detta för att debugga
 
 app.get('/', async (req, res) => {
 	const products = await getProducts();
@@ -38,4 +39,6 @@ app.get('/confirmation', async function (req, res) {
 	res.send(html_snippet);
 });
 
-app.listen(process.env.PORT);
+
+export default app;
+
